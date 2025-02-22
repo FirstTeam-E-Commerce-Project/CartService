@@ -1,7 +1,8 @@
 package ecom_ms.entity;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "User ID cannot be blank")
+    @Pattern(regexp = "^[a-zA-Z0-9_-]{3,20}$", message = "Invalid User ID format")
     private String userId;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -2,6 +2,8 @@ package ecom_ms.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class CartItem {
@@ -9,8 +11,11 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull(message = "Product ID is required")
+    @Min(value = 1, message = "Product ID must be a positive number")
     private long productId;
 
+    @Min(value = 1, message = "Quantity must be at least 1")
     private int quantity;
 
     @ManyToOne
